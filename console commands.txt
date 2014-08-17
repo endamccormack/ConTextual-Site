@@ -1,0 +1,2 @@
+User.authenticate("g@g.com", "otherPassword")
+User.find("g@g.com") 

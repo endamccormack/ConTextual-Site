@@ -1,0 +1,83 @@
+<!-- NAVIGATION STARTS HERE -->
+  <nav class="top-bar hide-for-small" data-topbar="">
+    <ul class="title-area">
+      <li class="name">
+      <h1><a href="/index"><img src="img/ConTextualLogo.png" style="height: 30px;"></a></h1>
+      </li>
+    </ul>
+
+    <section class="top-bar-section">
+      <ul class="right">
+        <li class="divider"></li>
+        <li>
+          <a href="/docs" class="">Product</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a href="/docs" class="">About</a>
+        </li>
+        <li class="divider"></li>
+        <li>
+          <a href="/docs" class="">Contact</a>
+        </li>
+        <li class="divider"></li>
+
+
+
+        <!-- START CODE SECTION -->
+        <% if(session[:username] != nil) %>
+
+          <span style="float:right; margin-right:20px; font-size:12px; margin-top:5px; color:white; margin-top:12px;">Welcome <%= session[:username]%></span>
+          <li class="has-form">
+            <a href="/myaccount" class="small button">My Account</a>
+          </li>
+          <li class="has-form">
+            <a href="/logout" class="small button">Log out</a>
+          </li>
+        <!-- ELSE CODE SECTION -->
+        <% else %>
+        
+        <li class="has-form">
+          <a href="/signup" class="small button">Sign up</a>
+        </li>
+
+        <li class="has-form">
+          <a href="/login" class="small button">Login</a>
+        </li>
+        <!-- END CODE SECTION -->
+        <% end %>
+
+
+
+      </ul>
+    </section>
+  </nav>
+  <div class="off-canvas-wrap show-for-small" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="left-small">
+          <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+        </section>
+
+        <section class="middle tab-bar-section">
+          <h1 class="title">Foundation</h1>
+        </section>
+      </nav>
+
+      <aside class="left-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><label>Found</label></li>
+          <li><a href="#">The </a></li>
+          <li><a href="#">...</a></li>
+        </ul>
+      </aside>
+
+      <section class="main-section">
+        <!-- content goes here -->
+      </section>
+
+    <a class="exit-off-canvas"></a>
+
+    </div>
+  </div>
+  <!-- NAVIGATION ENDS HERE -->

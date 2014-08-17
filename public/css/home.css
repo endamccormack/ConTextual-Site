@@ -38,6 +38,19 @@
     height: 50%;
     line-height:1.2;
     margin-top: 10px;
+
+}
+.ConTextualTagLineDark{
+    font-family: 'Economica' !important;
+    font-style: normal;
+    font-weight: lighter;
+    font-size: 48px;
+    color: #323232;
+    margin:0;
+    height: 50%;
+    line-height:1.2;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .ConTextualDarkImportantContent{
     font-family: 'Economica' !important;
