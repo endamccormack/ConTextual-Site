@@ -8,20 +8,20 @@ class ApplicationController < ActionController::Base
   	end
 
 	def attempt_login
-	authorized_user = User.authenticate(params[:username], params[:password]) 
+		authorized_user = User.authenticate(params[:username], params[:password]) 
 
-	if authorized_user
-	  session[:id] = authorized_user.getEmailAddress
+		if authorized_user
+		  session[:id] = authorized_user.getEmailAddress
 
-
-	  session[:username] = authorized_user.getFirstName
-	  #redirect_to(:controller => 'index', :action => 'index')
-	  redirect_to(:controller => 'myaccount', :action => 'index')
-	else
-	  flash[:notice] = "Sorry but your login details did not result in a sucessful login, please try again"
-	  redirect_to(:controller => 'account', :action => 'login')
-	end
-
+		  session[:username] = authorized_user.getFirstName
+		  session[:companyname] = authorized_user.getCompanyName
+		  session[:companyid] = authorized_user.getCompanyId
+		  #redirect_to(:controller => 'index', :action => 'index')
+		  redirect_to(:controller => 'myaccount', :action => 'dashboard')
+		else
+		  flash[:notice] = "Sorry but your login details did not result in a sucessful login, please try again"
+		  redirect_to(:controller => 'account', :action => 'login')
+		end
 	end
 
 	def logout

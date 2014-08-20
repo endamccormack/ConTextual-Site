@@ -1,0 +1,91 @@
+<div id="wrapper" class="section_light">
+
+	<div class="row">
+		<h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+				New Users	
+		</h2>
+		<h5 style="text-align:center;">
+			<%= session[:companyname]%>
+		</h5>
+		<div class="large-9 push-3 columns">
+
+	
+		<!---------------- form starts here -------------->
+
+		<form id="signUpForm" method="post" accept-charset="UTF-8" action="/createUser" data-parsley-validate>
+		      <p class="validateTips"></p>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>First Name <small>required</small>
+		            <input type="text" id="FirstName" placeholder="John" name="FirstName" data-parsley-minlength="2" required/>
+		          </label>
+		        </div>
+		        <div class="large-3 columns"></div>
+		      </div>
+
+
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns" class="name-field">
+		          <label>Last Name <small>required</small>
+		            <input type="text" placeholder="Smith" id="LastName" name="LastName" data-parsley-minlength="3" required/>
+		          </label>
+
+		        </div>
+		        
+		      </div>
+
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Email Address <small>required</small>
+		            <input type="email" placeholder="John@gmail.com" data-parsley-type="email" id="EmailAddress" name="EmailAddress" required/>
+		          </label>
+		        </div>
+		      </div>
+		        
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Job Title
+		            <input type="text" placeholder="Helicopter" name="JobTitle" />
+		          </label>
+		        </div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns" class="password-field">
+		          <label>Password <small>required</small>
+		            <input type="password" id="password" name="password" placeholder="Password" required/>
+		          </label>
+		        </div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns" class="password-confirmation-field">
+		          <label>Confirm Password <small>required</small>
+		            <input placeholder="Password" type="password" data-parsley-equalto="#password" required/>
+		          </label>
+		        </div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-4 push-5  columns">
+		          <input type="submit" class="button expand" />
+		        </div>
+		      </div>
+		    
+
+		    
+		    <!-- FORM ENDS HERE -->
+		  
+		  </form>
+
+
+
+		</div>
+
+		<%= render "shared/sideNav" %>
+	</div>
+</div>
+

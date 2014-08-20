@@ -11,10 +11,36 @@ Rails.application.routes.draw do
 
   get 'login' => 'account#login'
   get 'signup' => 'account#signup'
+  get 'myaccount' => 'myaccount#account'
   get 'myaccount' => 'myaccount#index'
   get 'index' => 'index#index'
+  get 'dashboard' => 'myaccount#dashboard'
+
+  get 'newUser' => 'myaccount#newUser'
+  get 'user/delete'  => 'myaccount#deleteUser'
+  post 'createUser' => 'myaccount#createUser'
+
+  get 'campaign' => 'campaign#index'
+  get 'newCampaign' => 'campaign#new'
+  get 'campaign/delete'  => 'campaign#delete'
+  post 'createCampaign' => 'campaign#create'
+
+  get 'ads' => 'advertisement#index'
+  get 'newAd' => 'advertisement#new'
+  post 'createAdvertisment' => 'advertisement#create'
+  get 'ad/delete'  => 'advertisement#delete'
+
+  get 'payment' => 'payment#index'
+  get 'newpayment' => 'payment#new'
+  post "createpayment" => 'payment#create'
+  get 'payment/delete' => 'payment#delete'
 
   post 'attempt_login' => 'application#attempt_login'
+  post 'attempt_signup' => 'account#attempt_signup'
+
+
+
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

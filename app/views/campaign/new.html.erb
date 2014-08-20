@@ -1,0 +1,50 @@
+<div id="wrapper" class="section_light">
+
+	<div class="row">
+		<h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+				New Campaign	
+		</h2>
+		<h5 style="text-align:center;">
+			<%= session[:companyname]%>
+		</h5>
+		<div class="large-9 push-3 columns">
+
+	
+		<!---------------- form starts here -------------->
+
+		<form id="newCapaign" method="post" accept-charset="UTF-8" action="/createCampaign" data-parsley-validate>
+		      <p class="validateTips"></p>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Name <small>required</small>
+		            <input type="text" id="Name" placeholder="Name of the campaign" name="Name" data-parsley-minlength="2" required/>
+		          </label>
+		        </div>
+		        <div class="large-3 columns"></div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns" class="name-field">
+		          <label>Description <small>required</small>
+		            <textarea  rows="4" cols="50" type="text" placeholder="Description" id="Description" name="Description" data-parsley-minlength="3" required></textarea>
+		          </label>
+
+		        </div>
+		        
+		      </div>
+
+		      <div class="row">
+		        <div class="large-4 push-5  columns">
+		          <input type="submit" class="button expand" />
+		        </div>
+		      </div>
+		    <!-- FORM ENDS HERE -->
+		  
+		  </form>
+		</div>
+
+		<%= render "shared/sideNav" %>
+	</div>
+</div>
+

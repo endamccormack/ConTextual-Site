@@ -1,0 +1,60 @@
+<div id="wrapper" class="section_light">
+
+	<div class="row">
+		<h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+				New Advertisement	
+		</h2>
+		<h5 style="text-align:center;">
+			<%= session[:companyname]%>
+		</h5>
+		<div class="large-9 push-3 columns">
+
+	
+		<!---------------- form starts here -------------->
+
+		<form id="newCapaign" method="post" accept-charset="UTF-8" action="/createAdvertisment" data-parsley-validate>
+		      <p class="validateTips"></p>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Title <small>required</small>
+		            <input type="text" id="Title" placeholder="Name of the campaign" name="Title" data-parsley-minlength="2" required/>
+		          </label>
+		        </div>
+		        <div class="large-3 columns"></div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Context <small>required</small>
+		            <input type="text" id="Context" placeholder="Name of the campaign" name="Context" data-parsley-minlength="2" required/>
+		          </label>
+		        </div>
+		        <div class="large-3 columns"></div>
+		      </div>
+
+		      <div class="row">
+		        <div class="large-8 push-1  columns">
+		          <label>Content <small>required</small>
+		            <input type="text" id="Content" placeholder="Name of the campaign" name="Content" data-parsley-minlength="2" required/>
+		          </label>
+		        </div>
+		        <div class="large-3 columns"></div>
+		      </div>	
+
+		      <input type="hidden" name="Campaign_id" id="Campaign_id" value="<%= params["Campaign_id"]%>"></input>
+
+		      <div class="row">
+		        <div class="large-4 push-5  columns">
+		          <input type="submit" class="button expand" />
+		        </div>
+		      </div>
+		    <!-- FORM ENDS HERE -->
+		  
+		  </form>
+		</div>
+
+		<%= render "shared/sideNav" %>
+	</div>
+</div>
+

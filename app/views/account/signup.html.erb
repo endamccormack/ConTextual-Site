@@ -1,18 +1,21 @@
-<form id="signUpForm">
-  <div class="section_light ">
-    <div class="row" style="margin-top:20px; margin-bottom:20px;">
-      <span class="ConTextualTagLineDark ">Sign up</span>
+<script type="text/javascript" src="js/parsley.js"></script>
+
+<div class="section_light ">
+ 
+  <form id="signUpForm" method="post" accept-charset="UTF-8" action="/attempt_signup" data-parsley-validate>
+  
+    <div class="row " style="margin-top:20px; margin-bottom:20px;">
+      <p class="ConTextualTagLineDark" style="width:100%; text-align:center;">Sign up</p>
     </div>
 
     <!-- FORM STARTS HERE -->
-    <form >
 
       <p class="validateTips"></p>
 
       <div class="row">
-        <div class="large-6 columns">
+        <div class="large-6 push-3 columns">
           <label>Company Name <small>required</small>
-            <input type="text" placeholder="Salamandar Corp" name="CompanyName" />
+            <input type="text" placeholder="Salamandar Corp" data-parsley-minlength="2" name="CompanyName" required/>
           </label>
 
         </div>
@@ -21,10 +24,9 @@
 
 
       <div class="row">
-        <div class="large-3 columns"></div>
-        <div class="large-6 columns">
+        <div class="large-6 push-3  columns">
           <label>First Name <small>required</small>
-            <input type="text" id="FirstName" placeholder="John" name="FirstName" />
+            <input type="text" id="FirstName" placeholder="John" name="FirstName" data-parsley-minlength="2" required/>
           </label>
         </div>
         <div class="large-3 columns"></div>
@@ -33,9 +35,9 @@
 
 
       <div class="row">
-        <div class="large-6 columns" class="name-field">
+        <div class="large-6 push-3  columns" class="name-field">
           <label>Last Name <small>required</small>
-            <input type="text" placeholder="Smith" id="LastName" name="LastName" />
+            <input type="text" placeholder="Smith" id="LastName" name="LastName" data-parsley-minlength="3" required/>
           </label>
 
         </div>
@@ -44,163 +46,123 @@
 
 
       <div class="row">
-        <div class="large-6 columns">
+        <div class="large-6 push-3  columns">
           <label>Email Address <small>required</small>
-            <input type="text" placeholder="John@gmail.com" id="EmailAddress" name="EmailAddress" />
+            <input type="email" placeholder="John@gmail.com" data-parsley-type="email" id="EmailAddress" name="EmailAddress" required/>
           </label>
         </div>
       </div>
         
       <div class="row">
-        <div class="large-6 columns">
-          <label>Job Title <small>required</small>
+        <div class="large-6 push-3  columns">
+          <label>Job Title
             <input type="text" placeholder="Helicopter" name="JobTitle" />
           </label>
         </div>
       </div>
 
       <div class="row">
-        <div class="large-6 columns" class="password-field">
+        <div class="large-6 push-3  columns" class="password-field">
           <label>Password <small>required</small>
-            <input type="password" id="password" name="password" placeholder="Password" />
+            <input type="password" id="password" name="password" placeholder="Password" required/>
           </label>
         </div>
       </div>
 
-
-
-
-
-
       <div class="row">
-        <div class="large-6 columns" class="password-confirmation-field">
+        <div class="large-6 push-3  columns" class="password-confirmation-field">
           <label>Confirm Password <small>required</small>
-            <input placeholder="Password" type="password" />
+            <input placeholder="Password" type="password" data-parsley-equalto="#password" required/>
           </label>
         </div>
       </div>
 
       <div class="row">
-      
-        <div class="large-4 columns">
-          <input type="submit" class="button expand"></input>
+        <div class="large-4 push-4  columns">
+          <input type="submit" class="button expand" />
         </div>
       </div>
-
-    </form>
-    <!-- FORM ENDS HERE -->
-  </div>
-<script type="text/javascript">
-$(function() {
     
-        $("theSubmitButton").prop('disabled', true);
-            var username = $( "#username" ),
-                password = $( "#password" ),
-                email = $('#EmailAddress')
-                allFields = $( [] ).add( username ).add( password ),
-                tips = $( ".validateTips" );
-     
-            function updateTips( t ) {
-                tips
-                    .text( t )
-                    .addClass( "ui-state-highlight" );
-                setTimeout(function() {
-                    tips.removeClass( "ui-state-highlight", 1500 );
-                }, 500 );
-            }
-     
-            function checkLength( o, n, min, max ) {
-                if ( o.val().length > max || o.val().length < min ) {
-                    o.addClass( "ui-state-error" );
-                    updateTips( "Length of " + n + " must be between " +
-                        min + " and " + max + "." );
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-     
-            function checkRegexp( o, regexp, n ) {
-                if ( !( regexp.test( o.val() ) ) ) {
-                    o.addClass( "ui-state-error" );
-                    updateTips( n );
-                    return false;
-                } else {
-                    return true;
-                }
-            }
 
-            
+    
+    <!-- FORM ENDS HERE -->
+  
+  </form>
+<!--   <div class="row">
+        <div class="large-4 columns">
+            <button class="button expand" onclick="validateSignup()">Submit</button>
+        </div>
+    </div> -->
+</div>
 
-            $( "#dialog-form" ).dialog({
-                closeOnEscape: false,
-                autoOpen: false,
-                height: 310,
-                width: 400,
-                resizable: false,
-                draggable: false,
-                modal: true,
-                id: "theDialog",
-                buttons: {
-                    Login: { 
-                        text: "Login",
-                        id: "LoginButton",      
-                        click: function() {
-                            var bValid = true;
-                            allFields.removeClass( "ui-state-error" );
-         
-                            bValid = bValid && checkLength( username, "username", 3, 16 );
-                            //bValid = bValid && checkLength( email, "email", 6, 80 );
-                            bValid = bValid && checkLength( password, "password", 5, 16 );
-         
-                            bValid = bValid && checkRegexp( username, 
-                                  /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, 
-                              "Must be a valid email address." );
-                            //From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
-                            //bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
-                            bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
-                            //"<td>" + name.val() + "</td>" + 
-                            if ( bValid ) {
-                                $( "#users tbody" ).append( "<tr>" +
-                                    "<td>" + username.val() + "</td>" + 
-                                    "<td>" + password.val() + "</td>" +
-                                "</tr>" ); 
-                                //$( this ).dialog( "close" );
-                               // allFields.val( "" ).removeClass( "ui-state-error" );
-                               allFields.removeClass( "ui-state-error" );
-                                $('#loginForm').submit();
-                                //$('#theSUbmitButton').trigger();
-                                 //$('#theSubmitButton').submit();
-                                 //$('#theSubmitButton').click();
-                            }
-                        }
-                    }
-                }
-            });
-
-            if($("#idHidden").val() == "" || $("#clientHidden").val() == "")
-            {
-                $( "#dialog-form" ).dialog( "open" );
-            }
-
-            
+<style type="text/css">
+.parsley-errors-list{
+  color: red;
+  list-style: none;
+}
+</style>
+// <script type="text/javascript">
 
 
-    });
+// function checkLength( o, n, min, max ) {
+//     if ( o.val().length > max || o.val().length < min ) {
+//         o.addClass( "ui-state-error" );
+//         updateTips( "Length of " + n + " must be between " +
+//             min + " and " + max + "." );
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
 
-    $('#username').keypress(function(event) {
-        
-        if ( event.which == 13 ) {
-             $('#LoginButton').click();
-       }
+// function checkRegexp( o, regexp, n ) {
+//     if ( !( regexp.test( o.val() ) ) ) {
+//         o.addClass( "ui-state-error" );
+//         updateTips( n );
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }
 
-        
-    });
-    $('#password').keypress(function() {
-        if ( event.which == 13 ) {
-             $('#LoginButton').click();
-       }
-    });
+// function validateSignup() {
+//     var bValid = true;
+//     allFields.removeClass( "ui-state-error" );
 
-</script>
-</script>
+//     bValid = bValid && checkLength( username, "username", 3, 16 );
+//     //bValid = bValid && checkLength( email, "email", 6, 80 );
+//     bValid = bValid && checkLength( password, "password", 5, 16 );
+
+//     bValid = bValid && checkRegexp( username, 
+//           /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, 
+//       "Must be a valid email address." );
+//     //From jquery.validate.js (by joern), contributed by Scott Gonzalez: http://projects.scottsplayground.com/email_address_validation/
+//     //bValid = bValid && checkRegexp( email, /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i, "eg. ui@jquery.com" );
+//     bValid = bValid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+//     if ( bValid ) {
+//       alert();
+//        allFields.removeClass( "ui-state-error" );
+//         $('#loginForm').submit();
+//     }
+// }
+
+
+  
+// $('#username').keypress(function(event) {
+    
+//     if ( event.which == 13 ) {
+//         validateSignup();
+//          //$('#LoginButton').click();
+//    }
+
+    
+// });
+// $('#password').keypress(function() {
+//     if ( event.which == 13 ) {
+//         validateSignup();
+//          //$('#LoginButton').click();
+//    }
+// });
+
+// </script>

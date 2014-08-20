@@ -62,6 +62,33 @@ class User
       @@FirstName
    end
 
+   def getLastName
+      @@LastName
+   end
+
+   def getJobTitle
+      @@JobTitle
+   end
+
+   def getCompanyId
+      @@Account_id
+   end
+
+   def getCompanyName
+      accountUri = URI.parse("http://localhost:9000/API/v1/Account")
+
+      params = { :id => @@Account_id}
+      accountUri.query = URI.encode_www_form(params)
+      res = Net::HTTP.get_response(accountUri)
+
+      puts res.body
+
+      account = ActiveSupport::JSON.decode(res.body)
+
+      account["CompanyName"]
+
+   end
+
 
    # attr_protected :hashedPassword, :salt
    

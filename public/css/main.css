@@ -617,3 +617,7 @@ ul.flyout li a:hover, .nav-bar li ul li a:hover { background: #151515; color: #f
 	}
 }
 
+.ui-dialog p{
+	color:#eee;
+}
+

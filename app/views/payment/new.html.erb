@@ -1,0 +1,121 @@
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+  <script src="js/jquery.payment.js"></script>
+
+  <style type="text/css" media="screen">
+
+    submit{
+      width: 
+    }
+    input.invalid {
+      border: 2px solid red;
+    }
+
+    .validation.failed:after {
+      color: red;
+      content: 'Validation failed';
+    }
+
+    .validation.passed:after {
+      color: green;
+      content: 'Validation passed';
+    }
+  </style>
+
+  <script>
+    jQuery(function($) {
+
+      $('#CardNumber').keypress(function(){
+        $("#cardType").val($.payment.cardType($('#CardNumber').val()));
+      });
+
+      $('#RestrictNumeric').payment('restrictNumeric');
+      $('.cc-number').payment('formatCardNumber');
+      $('.cc-exp').payment('formatCardExpiry');
+      $('.cc-cvc').payment('formatCardCVC');
+
+      $('form').submit(function(e) {
+        e.preventDefault();
+        $('input').removeClass('invalid');
+        $('.validation').removeClass('passed failed');
+
+        var cardType = $.payment.cardType($('#CardNumber').val());
+
+        $('.cc-number').toggleClass('invalid', !$.payment.validateCardNumber($('.cc-number').val()));
+        $('.cc-exp').toggleClass('invalid', !$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
+        $('.cc-cvc').toggleClass('invalid', !$.payment.validateCardCVC($('.cc-cvc').val(), cardType));
+
+        if ($('input.invalid').length) {
+          $('.validation').addClass('failed');
+        } else {
+          //$('#cardForm').post();
+          $('.validation').addClass('passed');
+          $.post( "/createpayment", {  CardNumber: $('#CardNumber').val(), ExpiryDate: $('#ExpiryDate').val(), CardHolderName: $('#CardHolderName').val(), CSVNumber: $('#CSVNumber').val(), CardType: $('#CardType').val(), Account_id: "<%= session[:companyid]%>"  } );
+          window.location.replace("/payment");
+        }
+      });
+    });
+  </script>
+
+  
+
+<div class="section_light">
+  
+    <div class="row">
+      <!------------ header ------------>
+      <h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+          Add a credit card 
+      </h2>
+      <h5 style="text-align:center;">
+        <%= session[:companyname]%>
+      </h5>
+      <!------------ end header ------------>
+
+      <!------------ Main content ------------>
+      <div class="large-9 push-3 columns"/>
+
+       <form id="cardForm"  autocomplete="on" method="POST" accept-charset="UTF-8" action="/createpayment">
+          <label class="large-7">
+            Card type
+            <select type="text" id="CardType" pattern="\d*" autocomplete="cc-number" placeholder="Card number" required>
+              <option value="MasterCard">MasterCard</option>
+              <option value="Visa">Visa</option>
+              <option value="Laser">Laser</option>
+            </select>
+          </label>
+
+          <label class="large-7">
+            Card Number
+            <input type="text" id="CardNumber" class="cc-number" autocomplete="cc-number" placeholder="Card number" required></input>
+          </label>
+
+          <label class="large-7">Expiry Date
+            <input type="text" id="ExpiryDate" class="cc-exp"  autocomplete="cc-exp" placeholder="Expires MM/YY" required></input>
+          </label>
+
+          <label class="large-7">CSV Number
+            <input type="text" id="CSVNumber" class="cc-cvc" autocomplete="off" placeholder="Security code" required></input>
+          </label>
+
+          <label class="large-7">Card Holder Name
+            <input type="text" id="CardHolderName" autocomplete="off" placeholder="Card Holder Name" required></input>
+          </label>
+
+          <!--<label class="large-7">Restrict Numeric
+            <input type="text" id="RestrictNumeric" data-numeric>
+          </label>-->
+
+          <h4 class="validation"></h4>
+
+          <!-- <button type="submit" class="push-5">Submit</button> -->
+          <input type="submit" class="button push-5 large-2" />
+        </form>
+      </div>
+      <!------------ End Main content ------------>
+      <!------------ sidebar  ------------>
+        <%= render "shared/sideNav" %>
+      <!------------ end sidebar  ------------>
+
+    
+    </div>
+</div>
+

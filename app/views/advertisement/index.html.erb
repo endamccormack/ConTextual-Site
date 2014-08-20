@@ -1,0 +1,103 @@
+<script>
+
+	function GetURLParameter(sParam)
+	{
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    for (var i = 0; i < sURLVariables.length; i++) 
+	    {
+	        var sParameterName = sURLVariables[i].split('=');
+	        if (sParameterName[0] == sParam) 
+	        {
+	            return sParameterName[1];
+	        }
+	    }
+	}
+
+  $(function() {
+    $( "#dialog-confirm" ).dialog({
+      resizable: true,
+      autoOpen: false,
+      height:250,
+      width:400,
+      modal: true,
+      buttons: {
+        "Delete": function() {
+	    	var theUrl = '/ad/delete?id=' + $("#dialog-confirm #id").val() + '&Campaign_id=' + GetURLParameter('Campaign_id');
+	  		$.ajax({
+			    url: theUrl,
+			    type: 'GET',
+			    success:function() {
+			        location.reload();
+		      	}
+			});
+			$("#dialog-confirm #id").val("");
+	  		$("#dialog-confirm #theId").text("");
+          	$( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  	$(".deleteButton").click(function() {
+  		$("#dialog-confirm #id").val(this.id);
+  		$("#dialog-confirm #theId").text(this.id);
+  		$( "#dialog-confirm").dialog( "open" );
+  	});
+  });
+
+  	
+  </script>
+
+<div id="wrapper" class="section_light">
+
+	<div class="row">
+		<h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+				Advertisements	
+		</h2>
+		<h5 style="text-align:center;">
+			<%= session[:companyname]%>
+		</h5>
+		<div class="large-9 push-3 columns">
+
+			<a href="/newAd?Campaign_id=<%= params["Campaign_id"]%>" style="margin-bottom:5px;">	
+				<span style="float:right;margin-bottom: 10px;" class="ui-icon ui-icon-circle-plus" ></span>
+				<small style="float:right; margin-top:3px;margin-bottom: 10px;">Add New</small>
+			</a>
+
+			<table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list" style="width:100%;">
+			  <thead>
+			    <tr>
+			      <th data-priority="1">Context</th>
+			      <th style="width:40%">Title</th>
+			      <th data-priority="2">Content</th>
+			      <th data-priority="3">Remove</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<% @ads.each do |ad| %>
+					<tr>
+				      <th><%= ad["Context"]  %></th>
+				      <td class="title"><%= ad["Title"]%></td>
+				      <td><%= ad["Content"] %></td>
+				      <td><a id="<%= ad["id"] %>" class="deleteButton"><span class=" ui-icon ui-icon-circle-minus"/></a></td>
+					</tr>
+				<%end%>
+			  </tbody>
+			</table>
+		</div>
+
+		<%= render "shared/sideNav" %>
+
+
+	</div>
+</div>
+<div id="dialog-confirm" title="Confirm Delete">
+	<input type="hidden" name="id" id="id">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you want to permanently delete this item with an id of <span id="theId"></span>?</p>
+</div>

@@ -1,0 +1,89 @@
+<script>
+  $(function() {
+    $( "#dialog-confirm" ).dialog({
+      resizable: true,
+      autoOpen: false,
+      height:250,
+      width:400,
+      modal: true,
+      buttons: {
+        "Delete": function() {
+	    	
+	  		$.ajax({
+			    url: '/payment/delete?id=' + $("#dialog-confirm #id").val(),
+			    type: 'GET',
+			    success:function() {
+			        location.reload();
+		      	}
+			});
+			$("#dialog-confirm #id").val("");
+	  		$("#dialog-confirm #theid").text("");
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+  });
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  	$(".deleteButton").click(function() {
+  		$("#dialog-confirm #id").val(this.id);
+  		$("#dialog-confirm #theid").text(this.id);
+  		$( "#dialog-confirm").dialog( "open" );
+  	});
+  });
+  </script>
+
+<div id="wrapper" class="section_light">
+
+	<div class="row">
+		<h2 style="text-align:center;" class="ConTextualDarkImportantContent">
+				Cards	
+		</h2>
+		<h5 style="text-align:center;">
+			<%= session[:companyname]%>
+		</h5>
+		<div class="large-9 push-3 columns">
+
+		<a href="/newpayment" style="margin-bottom:5px;">	
+			<span style="float:right;margin-bottom: 10px;" class="ui-icon ui-icon-circle-plus" ></span>
+			<small style="float:right; margin-top:3px;margin-bottom: 10px;">Add New</small>
+		</a>
+			<table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list" style="width:100%;">
+			  <thead>
+			    <tr>
+			      <th data-priority="1">Card Number</th>
+			      <th >Expiry Date</th>
+			      <th data-priority="2">Card Holder Name</th>
+			      <th data-priority="3">CSV</th>
+			      <th data-priority="3">CardType</th>
+			      <th data-priority="3">Remove</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<% @paymentDetails.each do |paymentDetail| %>
+					<tr>
+				      <th><%= paymentDetail["CardNumber"]  %></th>
+				      <td class="title"><%= paymentDetail["ExpiryDate"]%></td>
+				      <td><%= paymentDetail["CardHolderName"] %></td>
+				      <td><%= paymentDetail["CSV"] %></td>
+				      <td><%= paymentDetail["CardType"] %></td>
+				      <td><a id="<%= paymentDetail["id"] %>" class="deleteButton"><span class=" ui-icon ui-icon-circle-minus"/></a></td>
+					</tr>
+				<%end%>
+			  </tbody>
+			</table>
+		</div>
+
+		<%= render "shared/sideNav" %>
+
+
+	</div>
+</div>
+<div id="dialog-confirm" title="Confirm Delete">
+	<input type="hidden" name="id" id="id">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you want to permanently delete this item with an email address of <span id="theid"></span>?</p>
+</div>
