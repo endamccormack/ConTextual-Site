@@ -1,3 +1,4 @@
+require "rubygems"
 require 'net/http'
 
 class AccountController < ApplicationController
