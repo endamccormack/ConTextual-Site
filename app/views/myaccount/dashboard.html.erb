@@ -82,6 +82,7 @@
         chart.draw(data, options);
       }
     </script>
+    <script type="text/javascript" src="/js/othermap.js"></script>
 
 <div id="wrapper" class="section_light">
 
@@ -102,7 +103,10 @@
       </div>
 
       <div>
+        <div id="map_canvas" style="width:90%; height: 300px; margin: 5%;" ></div>
 
+        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCkSmiEYiKFMGhOAaCyQfi_ZZKwcsRMufc&sensor=true&callback=initialize" type="text/javascript">
+        </script>
       </div>  
   </div>
   <%= render "shared/sideNav" %>
