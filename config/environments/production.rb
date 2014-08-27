@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.gem "httparty"
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -8,7 +8,7 @@ Rails.application.configure do
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
-  config.eager_load = true
+ # config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
@@ -69,7 +69,7 @@ Rails.application.configure do
   config.i18n.fallbacks = true
 
   # Send deprecation notices to registered listeners.
-  config.active_support.deprecation = :notify
+  #config.active_support.deprecation = :notify
 
   # Disable automatic flushing of the log to improve performance.
   # config.autoflush_log = false
@@ -77,7 +77,7 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.gem "httparty"
+
 
   # Do not dump schema after migrations.
 #  config.active_record.dump_schema_after_migration = false
