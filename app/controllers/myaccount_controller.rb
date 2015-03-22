@@ -1,6 +1,5 @@
 require "rubygems"
 require 'net/http'
-require 'HTTParty'
 
 class MyaccountController < ApplicationController
 	def index

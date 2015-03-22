@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>ConTextual</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 
 <!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
@@ -22,13 +22,17 @@
   <link href='http://fonts.googleapis.com/css?family=Economica:400normal,400italic,700normal,700italic' rel='stylesheet' type='text/css'>
 
   <!-- If you are using the gem version, you need this only -->
-  <link rel="stylesheet" href="css/app.css">
+  <!-- <link rel="stylesheet" href="css/app.css"> -->
 
   <script src="js/vendor/modernizr.js"></script>
   <script src="js/vendor/jquery.js"></script>
   <script type="text/javascript" src="js/home.js"></script>
 </head>
-<body>
+
+ 
+    <body>
+
+
 <%= render "shared/menu" %>
 <%= yield %>
 

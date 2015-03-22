@@ -1,89 +1,4 @@
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Dublin', 'Cork', 'Limerick', 'Galway', 'Sligo'],
-          ['2013 H1',  0,        0,      0,          0,        0],
-          ['2013 H2',  100,     50,     20,          10,        5],
-          ['2014 Q1',  500,     300,    300,         70,      120],
-          ['2014 Q2',  1200,     460,    280,        300,      200],
-          ['2014 Q3',  1000,     460,    330,        320,      170]
-        ]);
-
-        var options = {
-          title: 'Ad performance',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0},
-          colors: ['#ff9900', '#323232','#ff9900', '#323232','#ff9900', '#323232']
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["gauge"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Click through', 'Value'],
-          ['Click', 60]
-        ]);
-
-        var options = {
-          width: 400, height: 140,
-          redFrom: 75, redTo: 100,
-          redColor:"#ff9900",
-          yellowFrom:25, yellowTo: 75,
-          yellowColor:"#555",
-          greenFrom:0, greenTo: 25,
-          greenColor:"#323232"
-        };
-
-        var chart = new google.visualization.Gauge(document.getElementById('gaugechart_div'));
-
-        chart.draw(data, options);
-
-        setInterval(function() {
-          data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 13000);
-        setInterval(function() {
-          data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
-          chart.draw(data, options);
-        }, 5000);
-        setInterval(function() {
-          data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
-          chart.draw(data, options);
-        }, 26000);
-      }
-    </script>
-
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Platform', 'Usage'],
-          ['Android',     6],
-          ['iOS',      4]
-        ]);
-
-        var options = {
-          title: 'Ads per platform',
-          colors: ['#ff9900', '#323232']
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        chart.draw(data, options);
-      }
-    </script>
-    <script type="text/javascript" src="/js/othermap.js"></script>
-
+<script type="text/javascript" src="https://www.google.com/jsapi?key=AIzaSyCkSmiEYiKFMGhOAaCyQfi_ZZKwcsRMufc"></script>
 <div id="wrapper" class="section_light">
 
   <div class="row">
@@ -104,11 +19,103 @@
 
       <div>
         <div id="map_canvas" style="width:90%; height: 300px; margin: 5%;" ></div>
-
-        <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCkSmiEYiKFMGhOAaCyQfi_ZZKwcsRMufc&sensor=true&callback=initialize" type="text/javascript">
-        </script>
+          <!-- <script type="text/javascript">
+             initialize();
+           </script>
+       <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCkSmiEYiKFMGhOAaCyQfi_ZZKwcsRMufc&sensor=true&callback=initialize" type="text/javascript">
+        </script>-->
       </div>  
   </div>
   <%= render "shared/sideNav" %>
 </div>
 </div>
+
+<script type="text/javascript" src="/js/othermap.js"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart","gauge"]});
+    google.setOnLoadCallback(drawChartGraph);
+    function drawChartGraph() {
+      var data = google.visualization.arrayToDataTable([
+        ['Year', 'Dublin', 'Cork', 'Limerick', 'Galway', 'Sligo'],
+        ['2013 H1',  0,        0,      0,          0,        0],
+        ['2013 H2',  100,     50,     20,          10,        5],
+        ['2014 Q1',  500,     300,    300,         70,      120],
+        ['2014 Q2',  1200,     460,    280,        300,      200],
+        ['2014 Q3',  1000,     460,    330,        320,      170]
+      ]);
+
+      var options = {
+        title: 'Ad performance',
+        hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0},
+        colors: ['#ff9900', '#323232','#ff9900', '#323232','#ff9900', '#323232']
+      };
+
+      var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+   
+
+    //google.load("visualization", "1", {packages:["gauge"]});
+    google.setOnLoadCallback(drawChartGauge);
+    function drawChartGauge() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Click through', 'Value'],
+        ['Click', 60]
+      ]);
+
+      var options = {
+        width: 400, height: 140,
+        redFrom: 75, redTo: 100,
+        redColor:"#ff9900",
+        yellowFrom:25, yellowTo: 75,
+        yellowColor:"#555",
+        greenFrom:0, greenTo: 25,
+        greenColor:"#323232"
+      };
+
+      var chart = new google.visualization.Gauge(document.getElementById('gaugechart_div'));
+
+      chart.draw(data, options);
+
+      // setInterval(function() {
+      //   data.setValue(0, 1, 40 + Math.round(60 * Math.random()));
+      //   chart.draw(data, options);
+      // }, 13000);
+      // setInterval(function() {
+      //   data.setValue(1, 1, 40 + Math.round(60 * Math.random()));
+      //   chart.draw(data, options);
+      // }, 5000);
+      // setInterval(function() {
+      //   data.setValue(2, 1, 60 + Math.round(20 * Math.random()));
+      //   chart.draw(data, options);
+      // }, 26000);
+    }
+
+    // google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChartPie);
+    function drawChartPie() {
+      var data = google.visualization.arrayToDataTable([
+        ['Platform', 'Usage'],
+        ['Android',     6],
+        ['iOS',      4]
+      ]);
+
+      // var data = new google.visualization.DataTable();
+      // data.add(['Platform','Usage'], ['Android',6], ['iOS',4]);
+      //data.addRows('Usage',6,4);
+      // [, ],
+      //   [,     6],
+      //   [,      4]
+      // ]);
+
+      var options = {
+        title: 'Ads per platform',
+        colors: ['#ff9900', '#323232']
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+</script>

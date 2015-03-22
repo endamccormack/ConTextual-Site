@@ -9,7 +9,11 @@ var markers = new Array();
 var imgStr;
 var infowindow;
 
+google.load("maps", "3");
+google.setOnLoadCallback(initialize);
+
 function initialize() {
+
     var mapOptions = {
         zoom: 6,
         //the level of zoom when it loads, the lower the number the more zoomed out you are
@@ -83,17 +87,17 @@ function initialize() {
 
 
 	//function for what to do when it loads
-	function loadScript() {
-		// var script = document.createElement("script");
-		// script.type = "text/javascript";
-		// script.src = "";
-		// //key in this is my API key, get another one because I have loads of things linked to it and a limit that if it 
-		// //goes over I have to pay money, use it for testing if you like but change before production
-		// document.body.appendChild(script);
-	}
+	// function loadScript() {
+	// 	// var script = document.createElement("script");
+	// 	// script.type = "text/javascript";
+	// 	// script.src = "";
+	// 	// //key in this is my API key, get another one because I have loads of things linked to it and a limit that if it 
+	// 	// //goes over I have to pay money, use it for testing if you like but change before production
+	// 	// document.body.appendChild(script);
+	// }
 
-	//when the page loads fire the loadScript
-	window.onload = loadScript;
+	// //when the page loads fire the loadScript
+	// window.onload = loadScript;
 
 	function doStuff()
 	{
